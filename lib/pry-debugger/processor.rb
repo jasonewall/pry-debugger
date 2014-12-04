@@ -1,5 +1,5 @@
 require 'pry'
-require 'debugger'
+require 'ruby-debug'
 
 module PryDebugger
   class Processor
@@ -95,9 +95,9 @@ module PryDebugger
     # immediately after with the context's `stop_reason == :breakpoint`.
     def at_breakpoint(context, breakpoint)
       @pry.output.print Pry::Helpers::Text.bold("\nBreakpoint #{breakpoint.id}. ")
-      @pry.output.puts  (breakpoint.hit_count == 1 ?
+      @pry.output.puts(  (breakpoint.hit_count == 1 ?
                            'First hit.' :
-                           "Hit #{breakpoint.hit_count} times." )
+                           "Hit #{breakpoint.hit_count} times." ))
       if (expr = breakpoint.expr)
         @pry.output.print Pry::Helpers::Text.bold("Condition: ")
         @pry.output.puts  expr
